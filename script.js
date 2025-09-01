@@ -1,23 +1,16 @@
-// Calculator state
 let currentInput = '0';
 let previousInput = '';
 let operation = null;
 let shouldResetScreen = false;
-let memory = 0;
-let isLightTheme = false;
 
-// DOM Elements
 const resultElement = document.getElementById('result');
 const historyElement = document.getElementById('history');
-const themeToggle = document.getElementById('theme-toggle');
 
-// Update display
 function updateDisplay() {
     resultElement.textContent = currentInput;
     historyElement.textContent = previousInput + (operation || '');
 }
 
-// Append number
 function appendNumber(number) {
     if (currentInput === '0' || shouldResetScreen) {
         currentInput = number;
@@ -28,7 +21,6 @@ function appendNumber(number) {
     updateDisplay();
 }
 
-// Append decimal point
 function appendDecimal() {
     if (shouldResetScreen) {
         currentInput = '0.';
@@ -39,7 +31,6 @@ function appendDecimal() {
     updateDisplay();
 }
 
-// Append operator
 function appendOperator(op) {
     calculate();
     previousInput = currentInput;
@@ -48,7 +39,6 @@ function appendOperator(op) {
     updateDisplay();
 }
 
-// Calculate result
 function calculate() {
     let computation;
     const prev = parseFloat(previousInput);
@@ -80,12 +70,10 @@ function calculate() {
     updateDisplay();
 }
 
-// Round result to avoid floating point issues
 function roundResult(num) {
     return Math.round(num * 1000000) / 1000000;
 }
 
-// Clear all
 function clearAll() {
     currentInput = '0';
     previousInput = '';
@@ -94,7 +82,6 @@ function clearAll() {
     updateDisplay();
 }
 
-// Backspace
 function backspace() {
     if (currentInput.length === 1) {
         currentInput = '0';
@@ -104,81 +91,11 @@ function backspace() {
     updateDisplay();
 }
 
-// Calculate percentage
 function calculatePercentage() {
     currentInput = (parseFloat(currentInput) / 100).toString();
     updateDisplay();
 }
 
-// Memory functions
-function clearMemory() {
-    memory = 0;
-}
-
-function recallMemory() {
-    currentInput = memory.toString();
-    updateDisplay();
-}
-
-function addToMemory() {
-    memory += parseFloat(currentInput);
-}
-
-function subtractFromMemory() {
-    memory -= parseFloat(currentInput);
-}
-
-// Toggle theme
-function toggleTheme() {
-    isLightTheme = !isLightTheme;
-    document.body.classList.toggle('light-theme', isLightTheme);
-    themeToggle.textContent = isLightTheme ? 'DARK MODE' : 'LIGHT MODE';
-}
-
-// Event delegation for button clicks
-document.querySelector('.keypad').addEventListener('click', (event) => {
-    const target = event.target;
-    
-    if (target.matches('button[data-number]')) {
-        appendNumber(target.getAttribute('data-number'));
-    } else if (target.matches('button[data-operator]')) {
-        appendOperator(target.getAttribute('data-operator'));
-    } else if (target.matches('button[data-action]')) {
-        const action = target.getAttribute('data-action');
-        
-        switch (action) {
-            case 'decimal':
-                appendDecimal();
-                break;
-            case 'calculate':
-                calculate();
-                break;
-            case 'clear-all':
-                clearAll();
-                break;
-            case 'backspace':
-                backspace();
-                break;
-            case 'percentage':
-                calculatePercentage();
-                break;
-            case 'memory-clear':
-                clearMemory();
-                break;
-            case 'memory-recall':
-                recallMemory();
-                break;
-            case 'memory-add':
-                addToMemory();
-                break;
-            case 'memory-subtract':
-                subtractFromMemory();
-                break;
-        }
-    }
-});
-
-// Keyboard support
 document.addEventListener('keydown', function(event) {
     if (/[0-9]/.test(event.key)) {
         appendNumber(event.key);
@@ -203,8 +120,4 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Theme toggle event
-themeToggle.addEventListener('click', toggleTheme);
-
-// Initialize display
 updateDisplay();
