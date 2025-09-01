@@ -21,6 +21,14 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
+.calculator-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+   
+    
 
 .display {
     padding: 20px;
