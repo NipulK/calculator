@@ -3,40 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Calculator</title>
+    <title>Interactive Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator">
+        
         <div class="display">
             <div class="history" id="history"></div>
             <div class="result" id="result">0</div>
         </div>
         
         <div class="keypad">
-            <button class="clear" onclick="clearAll()">C</button>
-            <button onclick="backspace()">⌫</button>
-            <button class="operator" onclick="appendOperator('/')">/</button>
-            <button class="operator" onclick="appendOperator('*')">×</button>
+            <button class="function" data-action="memory-clear">MC</button>
+            <button class="function" data-action="memory-recall">MR</button>
+            <button class="function" data-action="memory-add">M+</button>
+            <button class="function" data-action="memory-subtract">M-</button>
             
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button class="operator" onclick="appendOperator('-')">-</button>
+            <button class="function" data-action="clear-all">C</button>
+            <button class="function" data-action="backspace">⌫</button>
+            <button class="function" data-action="percentage">%</button>
+            <button class="operator" data-operator="/">/</button>
             
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button class="operator" onclick="appendOperator('+')">+</button>
+            <button data-number="7">7</button>
+            <button data-number="8">8</button>
+            <button data-number="9">9</button>
+            <button class="operator" data-operator="*">×</button>
             
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button class="equals" onclick="calculate()">=</button>
+            <button data-number="4">4</button>
+            <button data-number="5">5</button>
+            <button data-number="6">6</button>
+            <button class="operator" data-operator="-">-</button>
             
-            <button class="zero" onclick="appendNumber('0')">0</button>
-            <button onclick="appendDecimal()">.</button>
-            <button onclick="calculatePercentage()">%</button>
+            <button data-number="1">1</button>
+            <button data-number="2">2</button>
+            <button data-number="3">3</button>
+            <button class="operator" data-operator="+">+</button>
+            
+            <button class="zero" data-number="0">0</button>
+            <button data-action="decimal">.</button>
+            <button class="equals" data-action="calculate">=</button>
         </div>
     </div>
 
